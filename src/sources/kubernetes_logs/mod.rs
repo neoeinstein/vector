@@ -73,7 +73,7 @@ impl SourceConfig for Config {
         let exec = rt.executor();
         let resolver = Resolver::new(globals.dns_servers.clone(), exec)?;
 
-        let source = Source::init(self, resolver, globals, name)?;
+        let source = Source::new(self, resolver, globals, name)?;
 
         // TODO: this is a workaround for the legacy futures 0.1.
         // When the core is updated to futures 0.3 this should be simplied
@@ -110,7 +110,7 @@ struct Source {
 }
 
 impl Source {
-    fn init(
+    fn new(
         config: &Config,
         resolver: Resolver,
         globals: &GlobalOptions,
